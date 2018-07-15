@@ -20,12 +20,24 @@ namespace WebAddressbookTests
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            options.UseLegacyImplementation = true;
+            driver = new FirefoxDriver(options);
+            baseURL = "http://localhost/";
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
 
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
+        }
         public void Stop()
         {
             try
@@ -70,6 +82,7 @@ namespace WebAddressbookTests
             }
         }
 
+        
     }
 
 
