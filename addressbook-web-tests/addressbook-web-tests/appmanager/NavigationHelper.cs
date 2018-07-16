@@ -34,5 +34,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
+
+        public NavigationHelper OpenContactPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
+            return this;
+        }
     }
 }

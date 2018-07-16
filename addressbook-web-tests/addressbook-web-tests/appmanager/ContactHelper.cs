@@ -17,6 +17,28 @@ namespace WebAddressbookTests
 
         }
 
+        public ContactHelper RemovalContact()
+        {
+            manager.Navigator.OpenContactPage();
+            SelectContact(1);
+            RemoveContact();
+            CloseAlertWindow();
+            manager.Auth.Logout();
+            return this;
+        }
+
+        public ContactHelper ModifyContact(int v, ContactData newData)
+        {
+            manager.Navigator.OpenContactPage();
+            InitContactModification();
+            FillContactData(newData);
+            PressUpdateContact();
+            manager.Auth.Logout();
+
+            return this;
+        }
+
+        
         public ContactHelper CreateContact(ContactData contact)
         {
             manager.Navigator.GoToAddContactInterface();
@@ -25,12 +47,27 @@ namespace WebAddressbookTests
             manager.Auth.Logout();
             return this;
         }
+        
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("(//input[@value='Delete'])")).Click();
+            return this;
+        }
 
-                
+        public ContactHelper CloseAlertWindow()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
 
         public ContactHelper FillContactData(ContactData contact)
         {
-
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(contact.Firstname);
             driver.FindElement(By.Name("firstname")).Clear();
@@ -38,11 +75,22 @@ namespace WebAddressbookTests
             return this;
         }
 
-
         public ContactHelper PressTheButtonEnter()
         {
 
             driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+
+        public ContactHelper PressUpdateContact()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.XPath("(.//*[@id='maintable']/tbody/tr[2]/td[8]/a/img)")).Click();
             return this;
         }
     }
