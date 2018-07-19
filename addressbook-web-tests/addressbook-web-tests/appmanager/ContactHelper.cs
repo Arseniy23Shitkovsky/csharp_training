@@ -68,10 +68,9 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContactData(ContactData contact)
         {
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Lastname);
+            
+            Type(By.Name("contact_lastname"), contact.Firstname);
+            Type(By.Name("contact_firstname"), contact.Lastname);           
             return this;
         }
 
