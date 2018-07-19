@@ -20,6 +20,7 @@ namespace WebAddressbookTests
 
             app.Groups.Create(group);
             app.Auth.Logout();
+
         }
 
         [Test]
@@ -32,6 +33,7 @@ namespace WebAddressbookTests
 
             app.Groups.Create(group);
             
+
         }
 
 

@@ -23,8 +23,7 @@ namespace WebAddressbookTests
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
-            ReturnToGroupsPage();
-            manager.Auth.Logout();
+            ReturnToGroupsPage();           
             return this;
         }
 
@@ -36,6 +35,8 @@ namespace WebAddressbookTests
             FillGroupForm(newData);            
             SubmitGroupModification();
             ReturnToGroupsPage();
+            manager.Auth.Logout();
+
 
             return this;
         }
