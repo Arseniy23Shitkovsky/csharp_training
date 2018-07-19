@@ -69,8 +69,8 @@ namespace WebAddressbookTests
         public ContactHelper FillContactData(ContactData contact)
         {
             
-            Type(By.Name("contact_lastname"), contact.Firstname);
-            Type(By.Name("contact_firstname"), contact.Lastname);           
+            Type(By.Name("lastname"), contact.Firstname);
+            Type(By.Name("firstname"), contact.Lastname);           
             return this;
         }
 
