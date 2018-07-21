@@ -27,10 +27,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Modify(int p, GroupData newData)
+        public GroupHelper Modify(GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(p);
+            SelectGroup();
             InitGroupModification();
             FillGroupForm(newData);            
             SubmitGroupModification();
@@ -46,18 +46,43 @@ namespace WebAddressbookTests
         public GroupHelper Removal()
         { 
         manager.Navigator.GoToGroupsPage();
-            SelectGroup(1);
+            SelectGroup();
             RemoveGroup();
             ReturnToGroupsPage();
         manager.Auth.Logout();
             return this;
         }
-        public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup()
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            if (IsGroupPresent())
+            {
+                
+            }
+            else
+            {
+                GroupData group = new GroupData("aaa");
+                group.Header = "sss";
+                group.Footer = "ddd";
+                InitNewGroupCreation();
+                FillGroupForm(group);
+                SubmitGroupCreation();
+                ReturnToGroupsPage();
+                
+
+            }
+                                             
+           
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])")).Click();
             return this;
         }
 
+        
+
+        public bool IsGroupPresent()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+        
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
@@ -79,13 +104,15 @@ namespace WebAddressbookTests
 
         public GroupHelper FillGroupForm(GroupData group)
         {
-            
+           
             Type(By.Name("group_name"), group.Name);
             Type(By.Name("group_header"), group.Header);
             Type(By.Name("group_footer"), group.Footer);
             return this;
         }
-                
+
+        
+
         public GroupHelper SubmitGroupCreation()
         {
 

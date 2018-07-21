@@ -16,10 +16,11 @@ namespace WebAddressbookTests
         public void ContactModificationTest()
         {
             ContactData newData = new ContactData(null);
-            newData.Lastname = "Savrukova";
-            
+            newData.Lastname = "Savrukova";           
 
-            app.Contacts.ModifyContact(1, newData);
+            
         }
+
+        
     }
 }

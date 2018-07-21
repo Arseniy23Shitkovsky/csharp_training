@@ -62,8 +62,29 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
+            if (IsContactPresent())
+            {
+
+            }
+            else
+            {
+
+                ContactData contact = new ContactData("Arseniy");
+                contact.Lastname = "Shitkovskiy";
+                manager.Navigator.GoToAddContactInterface();
+                FillContactData(contact);
+                PressTheButtonEnter();
+                manager.Navigator.OpenContactPage();
+
+
+            }
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
+        }
+
+        public bool IsContactPresent()
+        {
+            return IsElementPresent(By.Name("entry"));
         }
 
         public ContactHelper FillContactData(ContactData contact)
@@ -89,6 +110,22 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification()
         {
+            if (IsContactPresent())
+            {
+
+            }
+            else
+            {
+
+                ContactData contact = new ContactData("Arseniy");
+                contact.Lastname = "Shitkovskiy";
+                manager.Navigator.GoToAddContactInterface();
+                FillContactData(contact);
+                PressTheButtonEnter();
+                manager.Navigator.OpenContactPage();
+
+
+            }
             driver.FindElement(By.XPath("(.//*[@id='maintable']/tbody/tr[2]/td[8]/a/img)")).Click();
             return this;
         }
