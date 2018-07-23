@@ -30,7 +30,7 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
-            app.Groups.Modify(newData);
+            app.Groups.Modify(newData,0);
         }
     }
 }
