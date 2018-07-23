@@ -53,24 +53,7 @@ namespace WebAddressbookTests
             return this;
         }
         public GroupHelper SelectGroup()
-        {
-            if (IsGroupPresent())
-            {
-                
-            }
-            else
-            {
-                GroupData group = new GroupData("aaa");
-                group.Header = "sss";
-                group.Footer = "ddd";
-                InitNewGroupCreation();
-                FillGroupForm(group);
-                SubmitGroupCreation();
-                ReturnToGroupsPage();
-                
-
-            }
-                                             
+        {                                                       
            
             driver.FindElement(By.XPath("(//input[@name='selected[]'])")).Click();
             return this;

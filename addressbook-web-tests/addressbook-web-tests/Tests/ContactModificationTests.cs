@@ -15,10 +15,20 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newData = new ContactData(null);
-            newData.Lastname = "Savrukova";           
+            if (!app.Contacts.IsContactPresent())
+            {
+                ContactData contact = new ContactData("Arseniy");
+                contact.Lastname = "Shitkovskiy";
+                app.Contacts.CreateContact(contact);
 
+            }
             
+            ContactData newData = new ContactData(null);
+            newData.Lastname = "Antonov";
+
+            app.Contacts.ModifyContact(1,newData);
+
+
         }
 
         

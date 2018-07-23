@@ -15,7 +15,15 @@ namespace WebAddressbookTests
 
             [Test]
             public void ContactRemovalTest()
+        {
+            if (!app.Contacts.IsContactPresent())
             {
+                ContactData contact = new ContactData("Arseniy");
+                contact.Lastname = "Shitkovskiy";
+                app.Contacts.CreateContact(contact);
+            }
+           
+            
             app.Contacts.RemovalContact();
         }
         }
