@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             SelectContact(1);
             RemoveContact();
             CloseAlertWindow();
-            manager.Auth.Logout();
+            
             return this;
         }
 
@@ -33,7 +33,7 @@ namespace WebAddressbookTests
             InitContactModification();
             FillContactData(newData);
             PressUpdateContact();
-            manager.Auth.Logout();
+            
 
             return this;
         }
@@ -46,7 +46,22 @@ namespace WebAddressbookTests
             PressTheButtonEnter();         
             return this;
         }
-        
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenContactPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("entry.td"));
+            foreach (IWebElement element in elements)
+            {
+
+                contacts.Add(new ContactData(element.Text));
+                
+            }
+            return contacts;
+        }
+
+
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("(//input[@value='Delete'])")).Click();

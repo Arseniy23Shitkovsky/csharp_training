@@ -48,10 +48,8 @@ namespace WebAddressbookTests
             InitGroupModification();
             FillGroupForm(newData);            
             SubmitGroupModification();
-            ReturnToGroupsPage();
-            manager.Auth.Logout();
-
-
+            ReturnToGroupsPage();    
+            
             return this;
         }
 

@@ -30,7 +30,15 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Modify(newData,0);
+            oldGroups[0].Name = newData.Name;
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }
