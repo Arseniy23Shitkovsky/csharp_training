@@ -17,10 +17,10 @@ namespace WebAddressbookTests
 
         }
 
-        public ContactHelper RemovalContact()
+        public ContactHelper RemovalContact(int v)
         {
             manager.Navigator.OpenContactPage();
-            SelectContact(1);
+            SelectContact(v);
             RemoveContact();
             CloseAlertWindow();
             
@@ -29,7 +29,7 @@ namespace WebAddressbookTests
 
         public ContactHelper ModifyContact(int v, ContactData newData)
         {
-            manager.Navigator.OpenContactPage();
+            manager.Navigator.OpenContactPage();            
             InitContactModification();
             FillContactData(newData);
             PressUpdateContact();
@@ -51,13 +51,17 @@ namespace WebAddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.OpenContactPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("entry.td"));
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));            
             foreach (IWebElement element in elements)
             {
+                var parseText = element.Text.Split(' ');
 
-                contacts.Add(new ContactData(element.Text));
-                
+                string firstname = parseText[1];
+                string lastname = parseText[0];                
+
+                contacts.Add(new ContactData(firstname, lastname));                
             }
+
             return contacts;
         }
 
@@ -77,7 +81,7 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
                        
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" +(index + 1)+ "]")).Click();
             return this;
         }
 
@@ -91,8 +95,8 @@ namespace WebAddressbookTests
         public ContactHelper FillContactData(ContactData contact)
         {
             
-            Type(By.Name("lastname"), contact.Firstname);
-            Type(By.Name("firstname"), contact.Lastname);           
+            Type(By.Name("firstname"), contact.Firstname);
+            Type(By.Name("lastname"), contact.Lastname);           
             return this;
         }
 

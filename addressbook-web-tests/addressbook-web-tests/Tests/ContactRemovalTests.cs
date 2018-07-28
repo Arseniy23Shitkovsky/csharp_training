@@ -22,10 +22,16 @@ namespace WebAddressbookTests
                 contact.Lastname = "Shitkovskiy";
                 app.Contacts.CreateContact(contact);
             }
-           
-            
-            app.Contacts.RemovalContact();
-        }
+
+              List<ContactData> oldContacts = app.Contacts.GetContactList();
+              app.Contacts.RemovalContact(1);
+              List<ContactData> newContacts = app.Contacts.GetContactList();
+              oldContacts.RemoveAt(1);
+              oldContacts.Sort();
+              newContacts.Sort();
+
+              Assert.AreEqual(oldContacts, newContacts);
+            }
         }
     
 }

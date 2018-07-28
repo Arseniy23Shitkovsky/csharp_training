@@ -1,21 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
-        private string lastname;
+        private string _firstname;
+        private string _lastname;
+
+        public ContactData(string firstname)
+        {
+            {
+                _firstname = firstname;
+                _lastname = "";
+            }
+        }
 
         public ContactData(string firstname, string lastname)
         {
             {
-                this.firstname = firstname;
-
+                _firstname = firstname;
+                _lastname = lastname;
             }           
         }
 
@@ -29,18 +33,22 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return Firstname == other.Firstname;
-            
 
-        }        
+            if (_firstname == other.Firstname)
+            {
+                if (_lastname == other.Lastname)
+                {
+                    return true;
+                }
+            }           
 
+            return false;       
+        }
 
         public override int GetHashCode()
         {
-            return Firstname.GetHashCode();
-            
-        }
-        
+            return Firstname.GetHashCode() + Lastname.GetHashCode();            
+        }       
 
         public override string ToString()
         {
@@ -56,18 +64,17 @@ namespace WebAddressbookTests
             }
             return Firstname.CompareTo(other.Firstname);
             
-        }
-        
+        }        
 
         public string Firstname
         {
             get
             {
-                return firstname;
+                return _firstname;
             }
             set
             {
-                firstname = value;
+                _firstname = value;
             }
         }
 
@@ -75,11 +82,11 @@ namespace WebAddressbookTests
         {
             get
             {
-                return lastname;
+                return _lastname;
             }
             set
             {
-                lastname = value;
+                _lastname = value;
             }
         }
     }

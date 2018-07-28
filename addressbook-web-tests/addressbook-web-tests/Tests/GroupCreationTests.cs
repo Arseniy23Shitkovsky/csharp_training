@@ -27,7 +27,7 @@ namespace WebAddressbookTests
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups,newGroups);
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -66,15 +66,6 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-
         }
-
-
-
-
-
-
-
-
     }
 }

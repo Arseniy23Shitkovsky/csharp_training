@@ -98,10 +98,6 @@ namespace WebAddressbookTests
             {
                 return contactHelper;
             }
-        }
-
-        
+        }        
     }
-
-
 }
