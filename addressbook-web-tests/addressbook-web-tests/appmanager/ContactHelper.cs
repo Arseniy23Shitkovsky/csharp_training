@@ -51,15 +51,16 @@ namespace WebAddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.OpenContactPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));            
-            foreach (IWebElement element in elements)
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+
+            foreach (IWebElement row in elements)
             {
-                var parseText = element.Text.Split(' ');
+                var tdCollection = row.FindElements(By.TagName("td"));
 
-                string firstname = parseText[1];
-                string lastname = parseText[0];                
+                var lastName = tdCollection[1].Text;
+                var firstName = tdCollection[2].Text;                
 
-                contacts.Add(new ContactData(firstname, lastname));                
+                contacts.Add(new ContactData(firstName, lastName));
             }
 
             return contacts;

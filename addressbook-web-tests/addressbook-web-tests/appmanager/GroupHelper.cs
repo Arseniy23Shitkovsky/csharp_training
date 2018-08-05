@@ -27,8 +27,10 @@ namespace WebAddressbookTests
             return this;
         }
 
+        //private List<GroupData> groupCache = null;
+
         public List<GroupData> GetGroupList()
-        {
+        {/*if(groupCache==null)*/
             List<GroupData> groups = new List<GroupData>();
             manager.Navigator.GoToGroupsPage();
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
