@@ -9,12 +9,10 @@ namespace WebAddressbookTests
 {
     [TestFixture]
         
-
-        public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : AuthTestBase
     {
-
-            [Test]
-            public void ContactRemovalTest()
+        [Test]
+        public void ContactRemovalTest()
         {
             if (!app.Contacts.IsContactPresent())
             {
@@ -23,15 +21,22 @@ namespace WebAddressbookTests
                 app.Contacts.CreateContact(contact);
             }
 
-              List<ContactData> oldContacts = app.Contacts.GetContactList();
-              app.Contacts.RemovalContact(1);
-              List<ContactData> newContacts = app.Contacts.GetContactList();
-              oldContacts.RemoveAt(1);
-              oldContacts.Sort();
-              newContacts.Sort();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData toBeRemoved = oldContacts[1];
+            app.Contacts.RemovalContact(1);
 
-              Assert.AreEqual(oldContacts, newContacts);
+            Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();            
+            oldContacts.RemoveAt(1);
+            oldContacts.Sort();
+            newContacts.Sort();
+
+            Assert.AreEqual(oldContacts, newContacts);
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
             }
         }
-    
+    }    
 }

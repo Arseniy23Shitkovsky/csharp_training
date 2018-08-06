@@ -4,23 +4,23 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string _firstname;
-        private string _lastname;
+        public string _Firstname;
+        private string _Lastname;
 
         public ContactData(string firstname)
         {
             {
-                _firstname = firstname;
-                _lastname = "";
+                _Firstname = firstname;
+                _Lastname = "";
             }
         }
 
         public ContactData(string firstname, string lastname)
         {
             {
-                _firstname = firstname;
-                _lastname = lastname;
-            }           
+                _Firstname = firstname;
+                _Lastname = lastname;
+            }
         }
 
         public bool Equals(ContactData other)
@@ -34,9 +34,9 @@ namespace WebAddressbookTests
                 return true;
             }
 
-            if (_firstname == other.Firstname)
+            if (_Firstname == other.Firstname)
             {
-                if (_lastname == other.Lastname)
+                if (_Lastname == other.Lastname)
                 {
                     return true;
                 }
@@ -74,28 +74,11 @@ namespace WebAddressbookTests
             }            
         }        
 
-        public string Firstname
-        {
-            get
-            {
-                return _firstname;
-            }
-            set
-            {
-                _firstname = value;
-            }
-        }
+        public string Firstname { get; set; }                   
 
-        public string Lastname
-        {
-            get
-            {
-                return _lastname;
-            }
-            set
-            {
-                _lastname = value;
-            }
-        }
+        public string Lastname { get; set; }
+
+        public string Id { get;set; }
+        
     }
 }
