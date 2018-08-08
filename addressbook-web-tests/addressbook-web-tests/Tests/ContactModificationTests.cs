@@ -17,13 +17,11 @@ namespace WebAddressbookTests
         {
             if (!app.Contacts.IsContactPresent())
             {
-                ContactData contact = new ContactData("Arseniy");
-                contact.Lastname = "Shitkovskiy";
+                ContactData contact = new ContactData("Arseniy", "Shitkovskiy");
                 app.Contacts.CreateContact(contact);
-
             }
             
-            ContactData newData = new ContactData(null);
+            ContactData newData = new ContactData();
             newData.Lastname = "Antonov";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
@@ -43,9 +41,6 @@ namespace WebAddressbookTests
                     Assert.AreEqual(newData.Lastname, contact.Lastname);
                 }
             }
-
-        }
-
-        
+        }        
     }
 }
