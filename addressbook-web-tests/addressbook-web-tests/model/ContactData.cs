@@ -36,8 +36,8 @@ namespace WebAddressbookTests
 
         public ContactData(string firstname, string lastname)
         {            
-                Firstname = firstname;
-                Lastname = lastname;            
+            Firstname = firstname;
+            Lastname = lastname;            
         }
 
         public ContactData()

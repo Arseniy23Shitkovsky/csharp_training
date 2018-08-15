@@ -45,7 +45,35 @@ namespace WebAddressbookTests
             };          
         }
 
-        public  ContactData GetContactInformationFromTable(int index)
+        public string CreateTextByEditForm(ContactData editForm)
+        {
+            string name = editForm.Firstname + " " + editForm.Lastname;
+
+            string homePhone = editForm.HomePhone != "" ? "H: " + editForm.HomePhone : "";
+            string mobilePhone = editForm.MobilePhone != "" ? "M: " + editForm.MobilePhone : "";
+            string workPhone = editForm.WorkPhone != "" ? "W: " + editForm.WorkPhone : "";
+
+            return name + editForm.Address + homePhone + mobilePhone + workPhone + editForm.Email + editForm.Email2 + editForm.Email3;
+        }
+
+        public string GetTextContactDetail(int usernameIndex)
+        {
+            manager.Navigator.OpenDetailsPage(usernameIndex);
+            string text = driver.FindElement(By.Id("content")).Text;
+
+            IList<string> listElements = text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            string finallyText = "";
+
+            foreach(string element in listElements)
+            {
+                finallyText += element;
+            }
+
+            return finallyText;
+        }
+
+        public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.OpenContactPage();
             IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]

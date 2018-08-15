@@ -50,5 +50,13 @@ namespace WebAddressbookTests
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
             return this;
         }
+
+        public void OpenDetailsPage(int index)
+        {
+            manager.Navigator.OpenContactPage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+               .FindElements(By.TagName("td"));
+            cells[6].Click();            
+        }
     }
 }
