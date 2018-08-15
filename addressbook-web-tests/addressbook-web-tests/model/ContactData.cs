@@ -30,6 +30,10 @@ namespace WebAddressbookTests
 
         public string Email3 { get; set; }
 
+        private string allPhones;
+
+        private string allEmails;
+
         public ContactData(string firstname, string lastname)
         {            
                 Firstname = firstname;
@@ -96,46 +100,57 @@ namespace WebAddressbookTests
         {
             get
             {
-                if(AllPhones != null)
+                if(allPhones != null)
                 {
-                   return AllPhones;
+                   return allPhones;
                 }
                 else
                 {
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                    return (PhoneCleanUp(HomePhone) + PhoneCleanUp(MobilePhone) + PhoneCleanUp(WorkPhone)).Trim();
                 }
             }
             set
             {
-                AllPhones = value;
+                allPhones = value;
             } 
         }
 
-        private string CleanUp(string phone)
+        private string PhoneCleanUp(string phone)
         {
             if(phone == null || phone == "")
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ -()]", "")  + "\r\n";
+
+            return Regex.Replace(phone, "[-() ]", "")  + "\r\n";
+        }
+
+        private string EmailCleanUp(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+
+            return email + "\r\n";
         }
 
         public string AllEmails
         {
             get
             {
-                if (AllEmails != null)
+                if (allEmails != null)
                 {
-                    return AllEmails;
+                    return allEmails;
                 }
                 else
                 {
-                    return ((Email + "\r\n") + (Email2 + "\r\n") + (Email3 + "\r\n")).Trim();
+                    return (EmailCleanUp(Email) + EmailCleanUp(Email2) + EmailCleanUp(Email3)).Trim();
                 }
             }
             set
             {
-                AllPhones = value;
+                allEmails = value;
             }
         }              
     }
