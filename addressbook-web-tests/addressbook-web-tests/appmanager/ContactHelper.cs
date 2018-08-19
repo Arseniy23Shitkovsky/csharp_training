@@ -33,8 +33,9 @@ namespace WebAddressbookTests
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-            return new ContactData(firstname, lastname)
+            return new ContactData(firstname)
             {
+                Lastname = lastname,
                 Address = address,                
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
@@ -83,8 +84,9 @@ namespace WebAddressbookTests
             string address = cells[3].Text;
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
-            return new ContactData(firstname, lastname)
+            return new ContactData(firstname)
             {
+                Lastname = lastname,
                 Address = address,
                 AllPhones = allPhones,
                 AllEmails = allEmails
@@ -142,7 +144,7 @@ namespace WebAddressbookTests
                     var lastName = tdCollection[1].Text;
                     var firstName = tdCollection[2].Text;
 
-                    contactCache.Add(new ContactData(firstName, lastName)
+                    contactCache.Add(new ContactData(firstName)
                     {
                         Id = row.FindElement(By.TagName("td")).GetAttribute("id")
                     });

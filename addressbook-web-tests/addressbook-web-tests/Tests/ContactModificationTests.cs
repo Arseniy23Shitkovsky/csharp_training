@@ -12,7 +12,8 @@ namespace WebAddressbookTests
         {
             if (!app.Contacts.IsContactPresent())
             {
-                ContactData contact = new ContactData("Arseniy", "Shitkovskiy");
+                ContactData contact = new ContactData("Arseniy");
+                contact.Lastname = "Shitkovskiy";
                 app.Contacts.CreateContact(contact);
             }
             

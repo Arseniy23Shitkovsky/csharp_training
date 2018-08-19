@@ -34,10 +34,9 @@ namespace WebAddressbookTests
 
         private string allEmails;
 
-        public ContactData(string firstname, string lastname)
+        public ContactData(string firstname)
         {            
-            Firstname = firstname;
-            Lastname = lastname;            
+            Firstname = firstname;                       
         }
 
         public ContactData()
@@ -74,8 +73,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "firstname=" + Firstname;
-           
+            return "\nfirstname=" + Firstname + "\nlastname=" + Lastname;           
         }        
 
         public int CompareTo(ContactData other)
