@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
-
 
 namespace WebAddressbookTests
 {
@@ -24,12 +20,14 @@ namespace WebAddressbookTests
 
         public static string GenerateRandomString(int max)
         {            
-            int l = Convert.ToInt32(rnd.NextDouble() * max);
+            int currentLenght = Convert.ToInt32(rnd.NextDouble() * max);
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < 1; i++)
+
+            for (int i = 0; i < currentLenght; i++)
             {
-                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 223 + 32)));
+                builder.Append(Convert.ToChar(32 + Convert.ToInt32(rnd.NextDouble() * 65)));
             }
+
             return builder.ToString();
         }
     }
