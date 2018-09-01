@@ -10,7 +10,7 @@ namespace WebAddressbookTests
     [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        [Column(Name = "id")]
+        [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
 
         [Column(Name = "firstname")]
@@ -40,9 +40,14 @@ namespace WebAddressbookTests
         [Column(Name = "email3")]
         public string Email3 { get; set; }
 
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
+
         private string allPhones;
 
         private string allEmails;
+
+
 
         public ContactData(string firstname)
         {            
@@ -166,15 +171,7 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB addressBookDB = new AddressBookDB())
             {
-                return (from g in addressBookDB.Contacts select g).ToList();
-            }
-        }
-
-        public static void Remove(string id)
-        {
-            using (var addressBookDB = new AddressBookDB())
-            {
-                addressBookDB.Contacts.Delete(c => c.Id == id);
+                return (from g in addressBookDB.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select g).ToList();
             }
         }
     }
