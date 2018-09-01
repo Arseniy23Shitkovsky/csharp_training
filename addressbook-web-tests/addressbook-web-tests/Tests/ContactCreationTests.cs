@@ -48,17 +48,16 @@ namespace WebAddressbookTests
             return JsonConvert.DeserializeObject<List<ContactData>>(File.ReadAllText("contacts.json"));
         }
 
-        [Test, TestCaseSource("GetContactDataFromFile")]
+        [Test, TestCaseSource("GetContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contact)
         {                       
                       
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-
+            List<ContactData> oldContacts = ContactData.GetAll();
             app.Contacts.CreateContact(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort(); 

@@ -103,6 +103,16 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper RemovalContact(string id)
+        {
+            manager.Navigator.OpenContactPage();
+            SelectContact(id);
+            RemoveContact();
+            CloseAlertWindow();
+
+            return this;
+        }
+
         public int GetContactCount()
         {
             Thread.Sleep(4000);
@@ -118,7 +128,17 @@ namespace WebAddressbookTests
 
             return this;
         }
-                
+
+        public ContactHelper ModifyContact(string contactId, ContactData newData)
+        {
+            manager.Navigator.OpenContactPage();
+            InitContactModification(contactId);
+            FillContactData(newData);
+            PressUpdateContact();
+
+            return this;
+        }
+
         public ContactHelper CreateContact(ContactData contact)
         {
             manager.Navigator.GoToAddContactInterface();
@@ -173,6 +193,12 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            return this;
+        }
+
         public bool IsContactPresent()
         {            
             return IsElementPresent(By.Name("entry"));            
@@ -205,6 +231,13 @@ namespace WebAddressbookTests
                 .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
                 
+            return this;
+        }
+
+        public ContactHelper InitContactModification(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).FindElement(By.XPath("(//img[@alt='Edit'])")).Click();
+
             return this;
         }
     }
